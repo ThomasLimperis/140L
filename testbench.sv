@@ -7,6 +7,11 @@ module testbench;
  reg [8-1:0] result;
  reg add_sub;
 
+logic d0,d1,s;
+wire y; 
+
+
+
  // Instantiate the Unit Under Test (UUT)
  addsub #(8) uut (
   .dataa(dataa), 
@@ -14,11 +19,19 @@ module testbench;
   .add_sub(add_sub),
   .result(result)
  );
+mux2 #(8) utt(
+	.d0(d0),
+	.d1(d1),
+	.s(s),
+	.y(y)
+);
 
+
+ //addsub
  initial begin
-
   //add_sub currently set to add/sub anytime add_sub, dataa, or datab is changed. Need to fix
 
+  $monitor("addsub--------------");
   #5 add_sub = 0; dataa = 9; datab = 2; add_sub = 0;
   $monitor("%d - %d = %d",dataa,datab,result);
 
@@ -42,8 +55,21 @@ module testbench;
 
   #40 dataa = 9; datab = 10; add_sub = 0;
   $monitor("%d - %d = %d",dataa,datab,result);
-   
- end
+ 
+	
+$monitor("mux2--------------");
+for(int i = 0; i < 8; i++) begin
+		d0 = i[0];
+		d1 = i[1];
+		s  = i[2];
+		#1 $display(d0,,d1,,s,,,,y);
+	end
+
+//mux3
+
+
+end
+
 
 		
 endmodule 
