@@ -6,7 +6,7 @@ module testbench;
  // Outputs
  reg [8-1:0] result;
  reg add_sub;
-
+ 
 logic d0,d1,s;
 wire y; 
 
@@ -26,37 +26,25 @@ mux2 #(8) utt(
 	.y(y)
 );
 
+logic [7:0] r;
+reg clk, reset, ena;
+counter_down #(8) utt1(
+	.clk(clk),
+	.reset(reset),
+	.ena(ena),
+	.result(r)
 
- //addsub
- initial begin
+);
+
+
+//addsub
+initial begin
   //add_sub currently set to add/sub anytime add_sub, dataa, or datab is changed. Need to fix
 
   $monitor("addsub--------------");
   #5 add_sub = 0; dataa = 9; datab = 2; add_sub = 0;
   $monitor("%d - %d = %d",dataa,datab,result);
 
-  #10 dataa = 3; datab = 2; add_sub = 1;
-  $monitor("%d + %d = %d",dataa,datab,result);
-
-  #15 dataa = 4; datab = 4; add_sub = 0;
-  $monitor("%d - %d = %d",dataa,datab,result);
-
-  #20 dataa = 10; datab = 2; add_sub = 1;
-  $monitor("%d + %d = %d",dataa,datab,result);
-
-  #25 add_sub=0;
-  $monitor("%d - %d = %d",dataa,datab,result);
-
-  #30 dataa = 0;
-  $monitor("%d - %d = %d",dataa,datab,result);
-
-  #35 add_sub=1;
-  $monitor("%d + %d = %d",dataa,datab,result);
-
-  #40 dataa = 9; datab = 10; add_sub = 0;
-  $monitor("%d - %d = %d",dataa,datab,result);
- 
-	
 $monitor("mux2--------------");
 for(int i = 0; i < 8; i++) begin
 		d0 = i[0];
@@ -64,11 +52,24 @@ for(int i = 0; i < 8; i++) begin
 		s  = i[2];
 		#1 $display(d0,,d1,,s,,,,y);
 	end
+r = 10;
 
-//mux3
+$monitor("counter_down--------------");
+for(int i = 0; i < 32; i++) begin
+		clk = i[0];
+		ena  = i[1];
+                reset = i[2];
+		#1 $monitor("%d %d %d %d",clk, reset, ena,r);
+	end
 
 
 end
+
+
+
+
+
+
 
 
 		
