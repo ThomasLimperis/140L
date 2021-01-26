@@ -1,14 +1,18 @@
 module testbench;
  // Inputs
  
- reg [8-1:0] dataa;
- reg [8-1:0] datab;
+ reg signed [8-1:0] dataa;
+ reg signed [8-1:0] datab;
  // Outputs
- reg [8-1:0] result;
+ reg signed [8-1:0] result;
  reg add_sub;
  
 logic d0,d1,s;
 wire y; 
+
+
+
+
 
 
 
@@ -38,12 +42,31 @@ counter_down #(8) utt1(
 
 
 //addsub
+reg [7:0] r1;
+reg [7:0] q1;
 initial begin
   //add_sub currently set to add/sub anytime add_sub, dataa, or datab is changed. Need to fix
 
+
   $monitor("addsub--------------");
-  #5 add_sub = 0; dataa = 9; datab = 2; add_sub = 0;
+  #5 add_sub = 0; dataa = 0; datab = -1; add_sub = 1;
+  $monitor("%d + %d = %d",dataa,datab,result);
+#10 add_sub = 0; dataa = 6; datab = -1; add_sub = 0;
   $monitor("%d - %d = %d",dataa,datab,result);
+  #10 r1 = 3; q1 = 9;
+  if( r1 %2 ==0) begin
+		$display("r1 is even");
+	end else begin
+		$display("r1 is not even");; 
+	end  
+	if( q1 %8 ==0) begin
+		$display("q1 is div by 8");; 
+	end else begin
+		$display("q1 is not div by 8");;  
+	end  
+   #15 add_sub = 0; dataa = 9; datab = 2; add_sub = 0;
+  $monitor("%d - %d = %d",dataa,datab,result);
+
 
 $monitor("mux2--------------");
 for(int i = 0; i < 8; i++) begin

@@ -6,7 +6,7 @@ module robs_datapath #(parameter WIDTH = 8)
 	input [WIDTH-1:0] multiplier, multiplicand,
 	input[14:0]  c,
 	output [WIDTH*2-1:0] product,
-	output zq, zr
+	logic zq, zr //changed from type "output" to type "logic"
 	);
 	
 	// Internal signals of the datapath module
@@ -35,5 +35,18 @@ module robs_datapath #(parameter WIDTH = 8)
 //  similar treatment for zq;
 //    zr = 1 if r is even
 //    zq = 1 if q is divisible by 8
+always_comb begin 
+	if( r %2 ==0) begin
+		zr =1;
+	end else begin
+		zr = 0; 
+	end  
+	if( q %8 ==0) begin
+		zq =1;
+	end else begin
+		zq = 0; 
+	end  
+end
+	
 
 endmodule

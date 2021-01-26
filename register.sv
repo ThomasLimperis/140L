@@ -13,7 +13,7 @@ module register # (parameter N = 8)
 //  if(...) out <= ... ;
 //  else if(...) out <= ... ;
 //   clear   load    out
-// 	   1       0      0	   (clear output)
+//     1       0      0	   (clear output)
 //     1       1      0
 //     0       0     hold  (no change in output)
 //     0       1      in   (update output)

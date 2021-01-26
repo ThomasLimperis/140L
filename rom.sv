@@ -32,4 +32,5 @@ module rom(
 
 // fill in the guts
 //   out = mem(addr)
+assign data = mem[addr];
 endmodule
