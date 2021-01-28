@@ -17,9 +17,9 @@ module right_shift_register #(parameter width = 16)(
 //		1       1	     load and logical right shift
 //		1		0	     load and arithmetic right shift
 		if (enable == 1 && mode == 1) begin
-			out <= in >> 1;
+			out <= {1'b0,in[width-1:1]};
 		end else if ( enable == 1 && mode == 0) begin
-			out <= in >>> 1;
+			out <= {in[width-1],in[width-1:1]};
 		end else begin
 			out <= in;
 		end
