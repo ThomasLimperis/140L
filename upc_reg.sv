@@ -17,12 +17,12 @@ module upcreg(
 //	   0		1		   upc_next
 //	   0	    0          upc+1
   
-	if (reset == 0 && load_incr == 1) begin
-		upc <=  upc_next;
+	if (reset) begin
+		upc <= 0;
 	end else if ( reset == 0 && load_incr == 0)begin
 		upc <= upc +1;
 	end else begin
-		upc <= 0;
+		upc <= upc_next;
 	end
   end
 endmodule  
