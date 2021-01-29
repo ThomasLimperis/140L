@@ -21,7 +21,7 @@ module right_shift_register #(parameter width = 16)(
 		end else if ( enable == 1 && mode == 0) begin
 			out <= {in[width-1],in[width-1:1]};
 		end else begin
-			out <= in;
+			out <= out;
 		end
  end
 

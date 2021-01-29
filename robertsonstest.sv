@@ -67,7 +67,7 @@ module robertsonstest;
 	  for(multiplicand = -64; multiplicand<64; multiplicand++) 
         rslt_disp2;
     end
-    #40ns $display("clock cycles = %d, test cycles = %d, sequence_cycles = %d",cycle,cycle1,cycle2);
+    #40ns $display("clock cycles = %h, test cycles = %h, sequence_cycles = %h",cycle,cycle1,cycle2);
     $stop;
   end
       
@@ -89,7 +89,7 @@ module robertsonstest;
 // in hex (0x) format     
       $display("Simulation succeeded %h = %h = %h * %h", expected_product,product,multiplier,multiplicand);
 // also in decimal
-      $display("Simulation succeeded %d = %d = %d * %d", expected_product,product,multiplier,multiplicand);
+      $display("Simulation succeeded %h = %h = %h * %h", expected_product,product,multiplier,multiplicand);
     end
     else 
       $display("Simulation failed %h != %h = %h * %h", product,expected_product,multiplier,multiplicand);
